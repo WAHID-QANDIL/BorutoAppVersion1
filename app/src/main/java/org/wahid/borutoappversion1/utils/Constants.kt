@@ -10,5 +10,10 @@ object Constants {
     const val DATASTORE_PREFERENCES_KEY_NAME = "datastore_preference_key"
 
 
+    const val BASE_URL = "http://10.0.2.16:8080/"
+    const val HEROES_END_POINT = "boruto/heroes"
+    const val HEROES_SEARCH_END_POINT = "boruto/heroes/search"
+
+
 
 }

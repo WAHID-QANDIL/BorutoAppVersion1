@@ -1,6 +1,7 @@
 [versions]
-agp = "8.8.0"
+agp = "8.9.0"
 coilNetworkOkhttp = "3.1.0"
+#converterKotlinxSerialization = "latest.version"
 #converterKotlinxSerialization = "latest.version"
 datastorePreferences = "1.1.3"
 #foundationZ = "1.8.0-beta03"
@@ -15,16 +16,18 @@ espressoCore = "3.6.1"
 kotlinxSerializationJson = "1.8.0"
 lifecycleRuntimeKtx = "2.8.7"
 activityCompose = "1.10.1"
-composeBom = "2025.02.00"
-navigationCompose = "2.8.8"
+composeBom = "2025.03.00"
+navigationCompose = "2.8.9"
 pagingRuntimeKtx = "3.3.6"
 paletteKtx = "1.0.0"
 retrofit = "2.9.0"
 roomRuntime = "2.6.1"
 swiperefreshlayout = "1.2.0-beta01"
 viewpager2 = "1.1.0"
+converterGson = "2.9.0"
 
 [libraries]
+converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
 #accompanist-pager = { module = "com.google.accompanist:accompanist-pager" }
 #accompanist-pager-indicators = { module = "com.google.accompanist:accompanist-pager-indicators" }
 #accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller" }
@@ -45,6 +48,7 @@ androidx-swiperefreshlayout = { module = "androidx.swiperefreshlayout:swiperefre
 androidx-viewpager2 = { module = "androidx.viewpager2:viewpager2", version.ref = "viewpager2" }
 coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coilNetworkOkhttp" }
 coil-network-okhttp = { module = "io.coil-kt.coil3:coil-network-okhttp", version.ref = "coilNetworkOkhttp" }
+#converter-kotlinx-serialization = { module = "com.squareup.retrofit2:converter-kotlinx-serialization", version.ref = "converterKotlinxSerialization" }
 #converter-kotlinx-serialization = { module = "com.squareup.retrofit2:converter-kotlinx-serialization", version.ref = "converterKotlinxSerialization" }
 gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroidCompiler" }

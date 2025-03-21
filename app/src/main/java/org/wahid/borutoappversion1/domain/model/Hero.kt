@@ -2,9 +2,10 @@ package org.wahid.borutoappversion1.domain.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.serialization.Serializable
 import org.wahid.borutoappversion1.utils.Constants.HERO_DATABASE_TABLE_NAME
 
-
+@Serializable
 @Entity(tableName = HERO_DATABASE_TABLE_NAME)
 data class Hero(
     @PrimaryKey(autoGenerate = false)
