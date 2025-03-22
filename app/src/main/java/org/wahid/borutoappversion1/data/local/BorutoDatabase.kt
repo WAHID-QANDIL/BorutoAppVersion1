@@ -17,5 +17,5 @@ import org.wahid.borutoappversion1.domain.model.HeroRemoteKey
 abstract class BorutoDatabase: RoomDatabase() {
 
     abstract fun heroDao():HeroDao
-    abstract fun heroRemoteKeyDao():HeroRemoteKeyDao
+    abstract fun heroRemoteKeysDao():HeroRemoteKeyDao
 }
