@@ -25,7 +25,8 @@ class HeroRemoteMediator @Inject constructor(
 
         return try {
             val page = when (loadType) {
-                LoadType.REFRESH -> getRemoteKeyClosestToCurrentPosition(state)?.nextPage?.minus(1) ?: 1
+                LoadType.REFRESH -> getRemoteKeyClosestToCurrentPosition(state)?.nextPage?.minus(1)
+                    ?: 1
 
                 LoadType.PREPEND -> {
                     val remoteKeys = getRemoteKeyForFirstItem(state)
@@ -34,6 +35,7 @@ class HeroRemoteMediator @Inject constructor(
                     )
                     prevPage
                 }
+
                 LoadType.APPEND -> {
                     val remoteKeys = getRemoteKeyForLastItem(state)
                     val nextPage =
@@ -85,6 +87,11 @@ class HeroRemoteMediator @Inject constructor(
         }?.data?.firstOrNull()?.let { hero ->
             heroRemoteKeysDao.getRemoteKey(hero.id)
         }
+
+//        val firstHero = state.firstItemOrNull()
+//        return if (firstHero != null)
+//            heroRemoteKeysDao.getRemoteKey(firstHero.id) else null
+
     }
 
     private suspend fun getRemoteKeyForLastItem(state: PagingState<Int, Hero>): HeroRemoteKeys? {
@@ -93,6 +100,10 @@ class HeroRemoteMediator @Inject constructor(
         }?.data?.lastOrNull()?.let { hero ->
             heroRemoteKeysDao.getRemoteKey(hero.id)
         }
+
+//        val lastHero = state.lastItemOrNull()
+//        return if (lastHero != null)
+//            heroRemoteKeysDao.getRemoteKey(lastHero.id) else null
 
     }
 
