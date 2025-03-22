@@ -6,11 +6,11 @@ import androidx.room.TypeConverters
 import org.wahid.borutoappversion1.data.local.dao.HeroDao
 import org.wahid.borutoappversion1.data.local.dao.HeroRemoteKeyDao
 import org.wahid.borutoappversion1.domain.model.Hero
-import org.wahid.borutoappversion1.domain.model.HeroRemoteKey
+import org.wahid.borutoappversion1.domain.model.HeroRemoteKeys
 
 
 @Database(
-    entities = [Hero::class,HeroRemoteKey::class],
+    entities = [Hero::class,HeroRemoteKeys::class],
     version = 1
 )
 @TypeConverters(DatabaseConverter::class)

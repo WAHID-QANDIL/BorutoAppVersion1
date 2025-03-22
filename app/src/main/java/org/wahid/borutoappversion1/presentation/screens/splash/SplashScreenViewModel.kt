@@ -23,13 +23,13 @@ class SplashScreenViewModel @Inject constructor(
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
-//            useCases.readOnBoardingState().collect{
-//                state ->
-//                _onBoardingState.value = state
+            useCases.readOnBoardingState().collect{
+                state ->
+                _onBoardingState.value = state
 //                Log.d("_onBoardingState", "$state")
-//            }
+            }
 
-           _onBoardingState.value = useCases.readOnBoardingState().stateIn(viewModelScope).value
+//           _onBoardingState.value = useCases.readOnBoardingState().stateIn(viewModelScope).value
 
         }
 
