@@ -1,4 +1,4 @@
-package org.wahid.borutoappversion1.di
+package org.wahid.borutoappversion1.dagger.di
 
 import android.content.Context
 import androidx.room.Room

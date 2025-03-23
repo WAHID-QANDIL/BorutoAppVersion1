@@ -13,6 +13,7 @@ object Constants {
     const val BASE_URL = "http://10.0.2.16:8080/"
     const val HEROES_END_POINT = "boruto/heroes"
     const val HEROES_SEARCH_END_POINT = "boruto/heroes/search"
+    const val NUMBER_OF_HEROES_PER_PAGE = 3
 
 
 

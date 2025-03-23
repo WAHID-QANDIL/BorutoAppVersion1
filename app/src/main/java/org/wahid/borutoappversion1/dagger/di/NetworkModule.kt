@@ -1,10 +1,14 @@
-package org.wahid.borutoappversion1.di
+package org.wahid.borutoappversion1.dagger.di
+
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
+import org.wahid.borutoappversion1.data.local.BorutoDatabase
 import org.wahid.borutoappversion1.data.remote.retrofit.BorutoApi
+import org.wahid.borutoappversion1.data.repository.RemoteDataSourceImpl
+import org.wahid.borutoappversion1.domain.repository.RemoteDataSource
 import org.wahid.borutoappversion1.utils.Constants.BASE_URL
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -37,5 +41,19 @@ object NetworkModule {
     @Provides
     @Singleton
     fun provideBorutoApi(retrofit: Retrofit): BorutoApi = retrofit.create(BorutoApi::class.java)
+
+
+    @Provides
+    @Singleton
+    fun provideRemoteDataSource(
+        borutoApi: BorutoApi,
+        borutoDatabase: BorutoDatabase,
+    ): RemoteDataSource {
+        return RemoteDataSourceImpl(
+            borutoApi = borutoApi,
+            borutoDatabase = borutoDatabase
+        )
+    }
+
 
 }
