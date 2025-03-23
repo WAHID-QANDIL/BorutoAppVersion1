@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import org.wahid.borutoappversion1.domain.use_cases.onboarding.UseCases
+import org.wahid.borutoappversion1.domain.use_cases.UseCases
 import javax.inject.Inject
 
 @HiltViewModel

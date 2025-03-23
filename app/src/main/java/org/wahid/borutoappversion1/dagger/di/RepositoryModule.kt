@@ -12,7 +12,8 @@ import org.wahid.borutoappversion1.data.repository.Repository
 import org.wahid.borutoappversion1.domain.repository.DatastoreOperations
 import org.wahid.borutoappversion1.domain.use_cases.onboarding.ReadOnBoardingState
 import org.wahid.borutoappversion1.domain.use_cases.onboarding.SaveOnBoardingUseCase
-import org.wahid.borutoappversion1.domain.use_cases.onboarding.UseCases
+import org.wahid.borutoappversion1.domain.use_cases.UseCases
+import org.wahid.borutoappversion1.domain.use_cases.get_all_heroes.GetAllHeroesUseCase
 import javax.inject.Singleton
 
 
@@ -31,7 +32,8 @@ object RepositoryModule {
     fun provideUseCases(repository: Repository):UseCases{
         return UseCases(
             saveOnBoardingUseCase = SaveOnBoardingUseCase(repository = repository),
-            readOnBoardingState = ReadOnBoardingState(repository = repository)
+            readOnBoardingState = ReadOnBoardingState(repository = repository),
+            getAllHeroesUseCase = GetAllHeroesUseCase(repository = repository)
         )
     }
 }
