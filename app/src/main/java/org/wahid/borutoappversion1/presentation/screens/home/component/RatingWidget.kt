@@ -1,10 +1,15 @@
 package org.wahid.borutoappversion1.presentation.screens.home.component
 
-import android.content.res.Configuration
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
@@ -16,15 +21,21 @@ import androidx.compose.ui.graphics.drawscope.translate
 import androidx.compose.ui.graphics.vector.PathParser
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import org.wahid.borutoappversion1.R
+import org.wahid.borutoappversion1.ui.theme.STARS_SPACE_BY_VALUE
 import org.wahid.borutoappversion1.ui.theme.StarColor
 
 @Composable
 fun RatingWidget(
     modifier: Modifier = Modifier,
-    rating: Float,
+    rating: Float = 4f,
+    spaceBy: Dp = STARS_SPACE_BY_VALUE,
+    scaleFactor: Float = 2f
 ) {
+
+    val stars: Map<String,Int> = starsCals(rating = rating)
 
     val startPathString = stringResource(R.string.STAR_PATH)
     val starPath = remember {
@@ -33,12 +44,37 @@ fun RatingWidget(
     val starPathBounds = remember {
         starPath.getBounds()
     }
-    StarWidget(
-        starPath = starPath,
-        starPathBounds = starPathBounds,
-        clipped = false,
-        empty = true
+
+    Row(
+        modifier = modifier,
+        horizontalArrangement = Arrangement.spacedBy(spaceBy)
     )
+    {
+        repeat (stars["fieldStars"]!!){
+            StarWidget(
+                starPath = starPath,
+                starPathBounds = starPathBounds,
+                scaleFactor = scaleFactor
+            )
+        }
+        repeat (stars["halfFieldStars"]!!){
+            StarWidget(
+                starPath = starPath,
+                starPathBounds = starPathBounds,
+                scaleFactor = scaleFactor,
+                clipped = true
+            )
+        }
+        repeat (stars["emptyStars"]!!){
+            StarWidget(
+                starPath = starPath,
+                starPathBounds = starPathBounds,
+                scaleFactor = scaleFactor,
+                empty = true
+            )
+        }
+
+    }
 
 
 }
@@ -50,7 +86,7 @@ fun StarWidget(
     starPathBounds: Rect,
     scaleFactor: Float = 2f,
     clipped: Boolean = false,
-    empty: Boolean = false
+    empty: Boolean = false,
 ) {
 
     Canvas(modifier = Modifier.size(24.dp)) {
@@ -86,8 +122,40 @@ fun StarWidget(
     }
 }
 
+@Composable
+fun starsCals(rating: Float): Map<String, Int> {
+
+    val maxStars by remember { mutableIntStateOf(5) }
+
+    var fieldStars by remember { mutableIntStateOf(0) }
+    var halfFieldStars by remember { mutableIntStateOf(0) }
+    var emptyStars by remember { mutableIntStateOf(0) }
+
+    LaunchedEffect(key1 = rating) {
+
+        fieldStars = rating.toInt()
+        halfFieldStars = if (rating - fieldStars >= 0.5f) 1 else 0
+        emptyStars = maxStars - fieldStars - halfFieldStars
+    }
+
+    if (fieldStars.plus(halfFieldStars) > maxStars){
+        fieldStars = 0
+        halfFieldStars = 0
+        emptyStars = 5
+    }
+    return mapOf<String, Int>(
+        "fieldStars" to fieldStars,
+        "halfFieldStars" to halfFieldStars,
+        "emptyStars" to emptyStars,
+
+        )
+
+
+
+}
+
+
 @Preview(showBackground = true)
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 private fun FieldStarPreview() {
     RatingWidget(modifier = Modifier, rating = 1f)
