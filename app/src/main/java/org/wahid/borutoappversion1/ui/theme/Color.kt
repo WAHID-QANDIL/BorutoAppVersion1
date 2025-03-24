@@ -13,6 +13,7 @@ val Purple400 = Color(0xFF380990)
 val PurpleGrey40 = Color(0xFF393982)
 val Gray = Color(0xFF4D4D57)
 val Pink40 = Color(0xFF7D5260)
+val StarColor = Color(0xFFFFC44D)
 
 
 val ColorScheme.welcomeScreenBackgroundColor
@@ -31,3 +32,5 @@ val ColorScheme.topAppBarTitleColor
 val ColorScheme.topAppBarContainerColor
     @Composable
     get() = if (isSystemInDarkTheme()) Color.Black else Purple400
+
+

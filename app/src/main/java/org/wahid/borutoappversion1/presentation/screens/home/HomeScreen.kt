@@ -15,6 +15,7 @@ import org.wahid.borutoappversion1.presentation.screens.home.component.HomeTopAp
 @Composable
 fun HomeScreen(
     viewModel: HomeScreenViewModel = hiltViewModel(),
+    navHostController: NavHostController
 ) {
     val hreoes = viewModel.heroes.collectAsLazyPagingItems()
     Scaffold(
@@ -34,5 +35,5 @@ fun HomeScreen(
 private fun PreviewHomeScreen() {
     val navHostController = rememberNavController()
 
-    HomeScreen()
+    HomeScreen(navHostController = navHostController)
 }
