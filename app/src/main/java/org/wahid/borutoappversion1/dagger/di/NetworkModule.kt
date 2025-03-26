@@ -13,7 +13,6 @@ import org.wahid.borutoappversion1.domain.repository.RemoteDataSource
 import org.wahid.borutoappversion1.utils.Constants.BASE_URL
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.HTTP
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
