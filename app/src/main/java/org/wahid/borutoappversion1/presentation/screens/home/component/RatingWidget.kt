@@ -29,13 +29,12 @@ import org.wahid.borutoappversion1.ui.theme.StarColor
 
 @Composable
 fun RatingWidget(
-    modifier: Modifier = Modifier,
-    rating: Float = 4f,
+    rating: Double,
     spaceBy: Dp = STARS_SPACE_BY_VALUE,
-    scaleFactor: Float = 2f
+    scaleFactor: Float = 2f,
 ) {
 
-    val stars: Map<String,Int> = starsCals(rating = rating)
+    val stars: RatingWidgetStars = starsCals(rating = rating)
 
     val startPathString = stringResource(R.string.STAR_PATH)
     val starPath = remember {
@@ -46,18 +45,17 @@ fun RatingWidget(
     }
 
     Row(
-        modifier = modifier,
         horizontalArrangement = Arrangement.spacedBy(spaceBy)
     )
     {
-        repeat (stars["fieldStars"]!!){
+        repeat(stars.fieldStars) {
             StarWidget(
                 starPath = starPath,
                 starPathBounds = starPathBounds,
                 scaleFactor = scaleFactor
             )
         }
-        repeat (stars["halfFieldStars"]!!){
+        repeat(stars.halfFieldStars) {
             StarWidget(
                 starPath = starPath,
                 starPathBounds = starPathBounds,
@@ -65,7 +63,7 @@ fun RatingWidget(
                 clipped = true
             )
         }
-        repeat (stars["emptyStars"]!!){
+        repeat(stars.emptyStars) {
             StarWidget(
                 starPath = starPath,
                 starPathBounds = starPathBounds,
@@ -123,7 +121,7 @@ fun StarWidget(
 }
 
 @Composable
-fun starsCals(rating: Float): Map<String, Int> {
+fun starsCals(rating: Double): RatingWidgetStars {
 
     val maxStars by remember { mutableIntStateOf(5) }
 
@@ -131,25 +129,22 @@ fun starsCals(rating: Float): Map<String, Int> {
     var halfFieldStars by remember { mutableIntStateOf(0) }
     var emptyStars by remember { mutableIntStateOf(0) }
 
-    LaunchedEffect(key1 = rating) {
+    fieldStars = rating.toInt()
+    halfFieldStars = if (rating - fieldStars >= 0.5f) 1 else 0
+    emptyStars = maxStars - fieldStars - halfFieldStars
 
-        fieldStars = rating.toInt()
-        halfFieldStars = if (rating - fieldStars >= 0.5f) 1 else 0
-        emptyStars = maxStars - fieldStars - halfFieldStars
-    }
 
-    if (fieldStars.plus(halfFieldStars) > maxStars){
+    if (fieldStars.plus(halfFieldStars) > maxStars) {
         fieldStars = 0
         halfFieldStars = 0
         emptyStars = 5
     }
-    return mapOf<String, Int>(
-        "fieldStars" to fieldStars,
-        "halfFieldStars" to halfFieldStars,
-        "emptyStars" to emptyStars,
 
-        )
-
+    return RatingWidgetStars(
+        emptyStars = emptyStars,
+        fieldStars = fieldStars,
+        halfFieldStars = halfFieldStars
+    )
 
 
 }
@@ -158,5 +153,5 @@ fun starsCals(rating: Float): Map<String, Int> {
 @Preview(showBackground = true)
 @Composable
 private fun FieldStarPreview() {
-    RatingWidget(modifier = Modifier, rating = 1f)
+    RatingWidget(rating = 1.6)
 }
