@@ -5,6 +5,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import org.wahid.borutoappversion1.data.local.BorutoDatabase
 import org.wahid.borutoappversion1.data.remote.retrofit.BorutoApi
 import org.wahid.borutoappversion1.data.repository.RemoteDataSourceImpl
@@ -12,6 +13,7 @@ import org.wahid.borutoappversion1.domain.repository.RemoteDataSource
 import org.wahid.borutoappversion1.utils.Constants.BASE_URL
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.HTTP
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
@@ -22,9 +24,13 @@ object NetworkModule {
     @Provides
     @Singleton
     fun provideOkHttp(): OkHttpClient {
+        val loggingInterceptor = HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        }
         return OkHttpClient.Builder()
             .readTimeout(15, TimeUnit.MINUTES)
             .connectTimeout(15, TimeUnit.MINUTES)
+            .addInterceptor(loggingInterceptor)
             .build()
     }
 
