@@ -1,4 +1,6 @@
 package org.wahid.borutoappversion1.ui.theme
+
+import android.provider.CalendarContract.Colors
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.ColorScheme
 import androidx.compose.runtime.Composable
@@ -33,4 +35,9 @@ val ColorScheme.topAppBarContainerColor
     @Composable
     get() = if (isSystemInDarkTheme()) Color.Black else Purple400
 
-
+val ColorScheme.shimmerBackgroundColor
+    @Composable
+    get() = if (isSystemInDarkTheme()) Color.Black.copy(alpha = 0.5f) else Color.White
+val ColorScheme.shimmerItemColor
+    @Composable
+    get() = if (isSystemInDarkTheme()) Color.White.copy(alpha = 0.4f) else Color.DarkGray.copy(alpha = .4f)
