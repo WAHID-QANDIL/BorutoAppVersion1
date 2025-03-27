@@ -8,7 +8,7 @@ import androidx.compose.ui.Modifier
 import org.wahid.borutoappversion1.ui.theme.SMALL_PADDING
 
 @Composable
-fun ShimmerEffect(modifier: Modifier = Modifier) {
+fun ShimmerEffect() {
 
     LazyColumn(
         modifier= Modifier.fillMaxSize(),
