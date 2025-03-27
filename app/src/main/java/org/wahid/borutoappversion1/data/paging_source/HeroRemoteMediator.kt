@@ -62,7 +62,8 @@ class HeroRemoteMediator @Inject constructor(
                     HeroRemoteKeys(
                         id = hero.id,
                         prevPage = previousPage,
-                        nextPage = nextPage
+                        nextPage = nextPage,
+                        lastUpdated = response.lastUpdated
                     )
                 }
                 heroRemoteKeysDao.addAllRemoteKeys(keys)
