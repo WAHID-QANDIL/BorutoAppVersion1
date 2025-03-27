@@ -10,6 +10,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import androidx.paging.compose.collectAsLazyPagingItems
+import org.wahid.borutoappversion1.navigation.Screen
 import org.wahid.borutoappversion1.presentation.common.ContentList
 import org.wahid.borutoappversion1.presentation.screens.home.component.HomeTopAppBar
 
@@ -26,7 +27,7 @@ fun HomeScreen(
 
     Scaffold(
         topBar = {
-            HomeTopAppBar({})
+            HomeTopAppBar { navHostController.navigate(Screen.Search.route) }
         }
     ) {
         val padding = it
@@ -35,21 +36,6 @@ fun HomeScreen(
             heroes = heroes,
             navHostController = navHostController
         )
-
-
-//        RatingWidget(
-//            rating = 3.0,
-//        )
-//        RatingWidget(
-//            rating = 3.0,
-//        )
-//        RatingWidget(
-//            rating = 3.0,
-//        )
-//        RatingWidget(
-//            rating = 3.0,
-//        )
-
     }
 
 }

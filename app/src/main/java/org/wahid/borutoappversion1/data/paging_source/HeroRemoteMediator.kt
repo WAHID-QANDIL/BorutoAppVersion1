@@ -3,6 +3,7 @@ package org.wahid.borutoappversion1.data.paging_source
 import android.util.Log
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
+import androidx.paging.PagingDataAdapter
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
@@ -29,7 +30,6 @@ class HeroRemoteMediator @Inject constructor(
             val page = when (loadType) {
                 LoadType.REFRESH -> {
                     getRemoteKeyClosestToCurrentPosition(state)?.nextPage?.minus(1) ?: 1
-
                 }
                 LoadType.PREPEND -> {
                     val remoteKeys = getRemoteKeyForFirstItem(state)
@@ -43,18 +43,21 @@ class HeroRemoteMediator @Inject constructor(
                 }
             }
 
+            Log.d("LOAD_TYPE", "load: ${loadType.name}")
             // Log the API response before storing in DB
             val response = borutoApi.getAllHeroes(page = page)
             Log.d("API_RESPONSE", "Heroes from API: ${response.heroes}")
 
             borutoDatabase.withTransaction {
                 if (loadType == LoadType.REFRESH) {
-                    heroDao.deleteAllHeroes()
                     heroRemoteKeysDao.deleteAllRemoteKeys()
+                    heroDao.deleteAllHeroes()
                 }
 
-                val previousPage = response.previousPage
-                val nextPage = response.nextPage
+                val previousPage = if(page == 1) null else page -1
+                val nextPage = if(page == 5) null else page + 1
+
+
                 val keys: List<HeroRemoteKeys> = response.heroes.map { hero ->
                     HeroRemoteKeys(
                         id = hero.id,
