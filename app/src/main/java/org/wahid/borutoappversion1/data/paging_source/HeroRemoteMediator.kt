@@ -11,6 +11,7 @@ import org.wahid.borutoappversion1.data.local.BorutoDatabase
 import org.wahid.borutoappversion1.data.remote.retrofit.BorutoApi
 import org.wahid.borutoappversion1.domain.model.Hero
 import org.wahid.borutoappversion1.domain.model.HeroRemoteKeys
+import java.time.LocalTime
 import javax.inject.Inject
 
 @OptIn(ExperimentalPagingApi::class)
@@ -24,22 +25,26 @@ class HeroRemoteMediator @Inject constructor(
 
     override suspend fun load(
         loadType: LoadType,
-        state: PagingState<Int, Hero>
+        state: PagingState<Int, Hero>,
     ): MediatorResult {
         return try {
             val page = when (loadType) {
                 LoadType.REFRESH -> {
                     getRemoteKeyClosestToCurrentPosition(state)?.nextPage?.minus(1) ?: 1
                 }
+
                 LoadType.PREPEND -> {
                     val remoteKeys = getRemoteKeyForFirstItem(state)
                         ?: return MediatorResult.Success(endOfPaginationReached = true)
-                    remoteKeys.prevPage ?: return MediatorResult.Success(endOfPaginationReached = true)
+                    remoteKeys.prevPage
+                        ?: return MediatorResult.Success(endOfPaginationReached = true)
                 }
+
                 LoadType.APPEND -> {
                     val remoteKeys = getRemoteKeyForLastItem(state)
                         ?: return MediatorResult.Success(endOfPaginationReached = true)
-                    remoteKeys.nextPage ?: return MediatorResult.Success(endOfPaginationReached = true)
+                    remoteKeys.nextPage
+                        ?: return MediatorResult.Success(endOfPaginationReached = true)
                 }
             }
 
@@ -54,8 +59,8 @@ class HeroRemoteMediator @Inject constructor(
                     heroDao.deleteAllHeroes()
                 }
 
-                val previousPage = if(page == 1) null else page -1
-                val nextPage = if(page == 5) null else page + 1
+                val previousPage = if (page == 1) null else page - 1
+                val nextPage = if (page == 5) null else page + 1
 
 
                 val keys: List<HeroRemoteKeys> = response.heroes.map { hero ->
@@ -80,6 +85,21 @@ class HeroRemoteMediator @Inject constructor(
         } catch (e: Exception) {
             MediatorResult.Error(e)
         }
+    }
+
+    override suspend fun initialize(): InitializeAction {
+        val currentTime = System.currentTimeMillis()
+        val lastUpdated = heroRemoteKeysDao.getRemoteKey(1)?.lastUpdated ?: 0L
+        val cacheTime = 1
+
+        val diffTime = (currentTime - lastUpdated) / 1000 / 60
+
+        return if (diffTime <= cacheTime) {
+            InitializeAction.SKIP_INITIAL_REFRESH
+        } else {
+            InitializeAction.LAUNCH_INITIAL_REFRESH
+        }
+
     }
 
     private suspend fun getRemoteKeyClosestToCurrentPosition(state: PagingState<Int, Hero>): HeroRemoteKeys? {

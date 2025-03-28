@@ -7,12 +7,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import org.wahid.borutoappversion1.domain.mapper.toHero
 import org.wahid.borutoappversion1.domain.model.Hero
+import org.wahid.borutoappversion1.presentation.error_screen.NetworkError
 import org.wahid.borutoappversion1.presentation.screens.home.component.ShimmerEffect
 import org.wahid.borutoappversion1.ui.theme.SMALL_PADDING
 
@@ -28,7 +30,8 @@ fun ContentList(
     val listState = rememberLazyListState()
     val pagingResult = handelPagingResult(heroes = heroes)
 
-    if (pagingResult){
+
+    if (pagingResult) {
         LazyColumn(
             state = listState,
             modifier = modifier.fillMaxWidth(),
@@ -50,14 +53,7 @@ fun ContentList(
             }
             Log.d("Heroes", "ContentList: ${heroes.itemCount}")
         }
-    }else
-    {
-        ShimmerEffect()
-
     }
-
-
-
 
 
 }
@@ -76,13 +72,16 @@ fun handelPagingResult(
         }
 
         return when {
+
+            error != null -> {
+                Log.d("handelPagingResult", "handelPagingResult: $error")
+                NetworkError(error)
+                false
+            }
             loadState.refresh is LoadState.Loading -> {
                 ShimmerEffect()
                 false
             }
-
-            error != null -> false
-
             else -> true
         }
 
