@@ -15,6 +15,7 @@ object Constants {
     const val HEROES_END_POINT = "boruto/heroes"
     const val HEROES_SEARCH_END_POINT = "boruto/heroes/search"
     const val NUMBER_OF_HEROES_PER_PAGE = 6
+    const val MEDIUM_ALPHA = 0.5f
 
 
 

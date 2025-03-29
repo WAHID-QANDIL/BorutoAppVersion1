@@ -3,7 +3,6 @@ package org.wahid.borutoappversion1.data.paging_source
 import android.util.Log
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
-import androidx.paging.PagingDataAdapter
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
@@ -11,7 +10,6 @@ import org.wahid.borutoappversion1.data.local.BorutoDatabase
 import org.wahid.borutoappversion1.data.remote.retrofit.BorutoApi
 import org.wahid.borutoappversion1.domain.model.Hero
 import org.wahid.borutoappversion1.domain.model.HeroRemoteKeys
-import java.time.LocalTime
 import javax.inject.Inject
 
 @OptIn(ExperimentalPagingApi::class)
@@ -90,7 +88,7 @@ class HeroRemoteMediator @Inject constructor(
     override suspend fun initialize(): InitializeAction {
         val currentTime = System.currentTimeMillis()
         val lastUpdated = heroRemoteKeysDao.getRemoteKey(1)?.lastUpdated ?: 0L
-        val cacheTime = 1
+        val cacheTime = 720
 
         val diffTime = (currentTime - lastUpdated) / 1000 / 60
 

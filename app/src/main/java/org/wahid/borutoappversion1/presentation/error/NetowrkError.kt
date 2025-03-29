@@ -1,6 +1,5 @@
-package org.wahid.borutoappversion1.presentation.error_screen
+package org.wahid.borutoappversion1.presentation.error
 
-import android.content.res.Configuration
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -31,6 +30,7 @@ import androidx.paging.LoadState
 import org.wahid.borutoappversion1.R
 import org.wahid.borutoappversion1.ui.theme.ERROR_ICON_SIZE
 import org.wahid.borutoappversion1.ui.theme.SMALL_PADDING
+import java.net.ConnectException
 import java.net.SocketTimeoutException
 
 @Composable
@@ -39,7 +39,7 @@ fun NetworkError(
 ) {
 
     val message by remember {
-        val message = parseErrorMessage(errorMessage = error.toString())
+        val message = parseErrorMessage(loadStateError = error)
         mutableStateOf(message)
     }
 
@@ -92,11 +92,11 @@ fun NetworkError(
 
 }
 
-fun parseErrorMessage(errorMessage: String): String {
+fun parseErrorMessage(loadStateError: LoadState.Error): String {
 
-    return when {
-        errorMessage.contains("java.net.SocketTimeoutException") -> "Server Unavailable"
-        errorMessage.contains("ConnectException") -> "Internet Unavailable"
+    return when(loadStateError.error) {
+        is SocketTimeoutException -> "Server Unavailable"
+        is ConnectException -> "Internet Unavailable"
         else -> "Unknown Exception"
     }
 

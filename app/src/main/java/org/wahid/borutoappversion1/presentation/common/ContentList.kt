@@ -13,7 +13,7 @@ import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import org.wahid.borutoappversion1.domain.mapper.toHero
 import org.wahid.borutoappversion1.domain.model.Hero
-import org.wahid.borutoappversion1.presentation.error_screen.NetworkError
+import org.wahid.borutoappversion1.presentation.error.NetworkError
 import org.wahid.borutoappversion1.presentation.screens.home.component.ShimmerEffect
 import org.wahid.borutoappversion1.ui.theme.SMALL_PADDING
 

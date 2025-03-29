@@ -11,4 +11,7 @@
     <string name="server_unavailable">Server Unavailable</string>
     <string name="internet_unavailable">Internet Unavailable</string>
     <string name="unknown_exception">Unknown Exception</string>
+    <string name="search_here">Search Here</string>
+    <string name="close">Close</string>
+    <string name="search">Search</string>
 </resources>

@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -20,11 +21,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.tooling.preview.Preview
 import org.wahid.borutoappversion1.ui.theme.HERO_HOME_ITEM_HEIGHT
-import org.wahid.borutoappversion1.ui.theme.SHIMMER_STAR_PLACEHOLDER_ITEM_SIZE
 import org.wahid.borutoappversion1.ui.theme.MEDIUM_PADDING
 import org.wahid.borutoappversion1.ui.theme.ROUNDED_CORNER_SIZE
 import org.wahid.borutoappversion1.ui.theme.SHIMMER_ABOUT_PLACEHOLDER_ITEM
 import org.wahid.borutoappversion1.ui.theme.SHIMMER_NAME_PLACEHOLDER_ITEM
+import org.wahid.borutoappversion1.ui.theme.SHIMMER_STAR_CORNER_SIZE
 import org.wahid.borutoappversion1.ui.theme.SMALL_PADDING
 import org.wahid.borutoappversion1.ui.theme.STARS_SPACE_BY_VALUE
 import org.wahid.borutoappversion1.ui.theme.shimmerBackgroundColor
@@ -82,14 +83,12 @@ fun HeroShimmerItem(alpha: Float = 1f) {
             )
             {
                 repeat(5) {
-                    Box(
+                    Surface(
                         modifier = Modifier
                             .alpha(alpha = alpha)
-                            .size(SHIMMER_ABOUT_PLACEHOLDER_ITEM)
-                            .background(
-                                color = MaterialTheme.colorScheme.shimmerItemColor,
-                                shape = RoundedCornerShape(SHIMMER_STAR_PLACEHOLDER_ITEM_SIZE)
-                            )
+                            .size(SHIMMER_ABOUT_PLACEHOLDER_ITEM),
+                        color = MaterialTheme.colorScheme.shimmerItemColor,
+                        shape = RoundedCornerShape(corner = CornerSize(SHIMMER_STAR_CORNER_SIZE))
                     ) { }
                 }
 
