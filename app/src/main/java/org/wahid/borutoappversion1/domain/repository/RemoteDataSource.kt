@@ -6,6 +6,6 @@ import org.wahid.borutoappversion1.domain.model.Hero
 
 interface RemoteDataSource {
 
-    suspend fun getAllHeroes(): Flow<PagingData<Hero>>
-    fun searchForHero(): Flow<PagingData<Hero>>
+    fun getAllHeroes(): Flow<PagingData<Hero>>
+    fun searchForHero(query: String): Flow<PagingData<Hero>>
 }
