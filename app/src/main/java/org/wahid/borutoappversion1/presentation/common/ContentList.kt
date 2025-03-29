@@ -88,5 +88,3 @@ fun handelPagingResult(
     }
 
 }
-
-
