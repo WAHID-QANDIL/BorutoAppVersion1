@@ -1,4 +1,4 @@
-package org.wahid.borutoappversion1.presentation.error
+package org.wahid.borutoappversion1.presentation.place_holder
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -34,17 +34,22 @@ import java.net.ConnectException
 import java.net.SocketTimeoutException
 
 @Composable
-fun NetworkError(
-    error: LoadState.Error,
+fun PlaceHolderScreen(
+    error: LoadState.Error? = null,
 ) {
 
-    val message by remember {
-        val message = parseErrorMessage(loadStateError = error)
+    var message by remember {
+        val message = "Find Your Favorite Heroes"
         mutableStateOf(message)
     }
 
-    val icon by remember {
-        mutableIntStateOf(R.drawable.ic_netowrk_error)
+    var icon by remember {
+        mutableIntStateOf(R.drawable.ic_search_place_holder)
+    }
+
+    if (error != null){
+        message = parseErrorMessage(error)
+        icon = R.drawable.ic_netowrk_error
     }
 
 
@@ -105,5 +110,5 @@ fun parseErrorMessage(loadStateError: LoadState.Error): String {
 @Preview
 @Composable
 private fun NetworkErrorPreview() {
-    NetworkError(LoadState.Error(SocketTimeoutException()))
+    PlaceHolderScreen(LoadState.Error(SocketTimeoutException()))
 }

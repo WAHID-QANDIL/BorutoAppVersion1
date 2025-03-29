@@ -13,7 +13,7 @@ import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import org.wahid.borutoappversion1.domain.mapper.toHero
 import org.wahid.borutoappversion1.domain.model.Hero
-import org.wahid.borutoappversion1.presentation.error.NetworkError
+import org.wahid.borutoappversion1.presentation.place_holder.PlaceHolderScreen
 import org.wahid.borutoappversion1.presentation.screens.home.component.ShimmerEffect
 import org.wahid.borutoappversion1.ui.theme.SMALL_PADDING
 
@@ -22,18 +22,21 @@ fun ContentList(
     modifier: Modifier = Modifier,
     heroes: LazyPagingItems<Hero>,
     navHostController: NavHostController,
+    isShowing: Boolean = false
 
     ) {
     Log.d("ContentList", "ContentList: ${heroes.loadState}")
 
     val listState = rememberLazyListState()
-    val pagingResult = handelPagingResult(heroes = heroes)
+    val pagingResult = handelPagingResult(heroes = heroes, isShowing = isShowing)
 
 
     if (pagingResult) {
         LazyColumn(
             state = listState,
-            modifier = modifier.fillMaxWidth(),
+            modifier = modifier
+                .fillMaxWidth(),
+//                .padding(horizontal = SMALL_PADDING, vertical = SMALL_PADDING),
             contentPadding = PaddingValues(all = SMALL_PADDING),
             verticalArrangement = Arrangement.spacedBy(SMALL_PADDING),
         ) {
@@ -60,6 +63,7 @@ fun ContentList(
 @Composable
 fun handelPagingResult(
     heroes: LazyPagingItems<Hero>,
+    isShowing: Boolean = false,
 ): Boolean {
 
     with(heroes) {
@@ -70,18 +74,30 @@ fun handelPagingResult(
             else -> null
         }
 
-        return when {
+        return if (isShowing) {
+            when {
 
-            error != null -> {
-                Log.d("handelPagingResult", "handelPagingResult: $error")
-                NetworkError(error)
-                false
+                error != null -> {
+                    Log.d("handelPagingResult", "handelPagingResult: $error")
+                    PlaceHolderScreen(error)
+                    false
+                }
+
+                loadState.refresh is LoadState.Loading -> {
+                    ShimmerEffect()
+                    false
+                }
+
+                heroes.itemCount < 1 -> {
+                    PlaceHolderScreen()
+                    false
+                }
+
+                else -> true
             }
-            loadState.refresh is LoadState.Loading -> {
-                ShimmerEffect()
-                false
-            }
-            else -> true
+
+        } else {
+            false
         }
 
     }

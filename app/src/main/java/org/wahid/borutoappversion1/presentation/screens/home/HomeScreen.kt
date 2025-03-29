@@ -34,7 +34,8 @@ fun HomeScreen(
         ContentList(
             modifier = Modifier.padding(padding),
             heroes = heroes,
-            navHostController = navHostController
+            navHostController = navHostController,
+            isShowing = true
         )
     }
 

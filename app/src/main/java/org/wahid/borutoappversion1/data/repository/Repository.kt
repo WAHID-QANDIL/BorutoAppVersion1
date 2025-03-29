@@ -19,7 +19,12 @@ class Repository @Inject constructor(
         return datastoreOperations.readOnBoardingState()
     }
 
-    suspend fun getAllHeroes(): Flow<PagingData<Hero>> = remoteDataSource.getAllHeroes()
+    fun getAllHeroes(): Flow<PagingData<Hero>> = remoteDataSource.getAllHeroes()
+
+    fun searchForHero(query: String): Flow<PagingData<Hero>> {
+        return remoteDataSource.searchForHero(query = query)
+
+    }
 
 
 }

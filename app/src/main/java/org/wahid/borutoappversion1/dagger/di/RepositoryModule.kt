@@ -14,6 +14,7 @@ import org.wahid.borutoappversion1.domain.use_cases.onboarding.ReadOnBoardingSta
 import org.wahid.borutoappversion1.domain.use_cases.onboarding.SaveOnBoardingUseCase
 import org.wahid.borutoappversion1.domain.use_cases.UseCases
 import org.wahid.borutoappversion1.domain.use_cases.get_all_heroes.GetAllHeroesUseCase
+import org.wahid.borutoappversion1.domain.use_cases.search_heroes.SearchHeroes
 import javax.inject.Singleton
 
 
@@ -33,7 +34,8 @@ object RepositoryModule {
         return UseCases(
             saveOnBoardingUseCase = SaveOnBoardingUseCase(repository = repository),
             readOnBoardingState = ReadOnBoardingState(repository = repository),
-            getAllHeroesUseCase = GetAllHeroesUseCase(repository = repository)
+            getAllHeroesUseCase = GetAllHeroesUseCase(repository = repository),
+            searchHeroes = SearchHeroes(repository = repository)
         )
     }
 }
