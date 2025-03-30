@@ -39,7 +39,7 @@ import org.wahid.borutoappversion1.navigation.Screen
 import org.wahid.borutoappversion1.presentation.screens.home.component.RatingWidget
 import org.wahid.borutoappversion1.ui.theme.HERO_HOME_ITEM_HEIGHT
 import org.wahid.borutoappversion1.ui.theme.MEDIUM_PADDING
-import org.wahid.borutoappversion1.ui.theme.ROUNDED_CORNER_SIZE
+import org.wahid.borutoappversion1.ui.theme.DEFAULT_ROUNDED_CORNER_SIZE
 import org.wahid.borutoappversion1.utils.Constants.BASE_URL
 
 @Composable
@@ -67,7 +67,7 @@ fun HeroHomeItem(
         contentAlignment = Alignment.BottomCenter
     ) {
         Surface(
-            shape = RoundedCornerShape(ROUNDED_CORNER_SIZE)
+            shape = RoundedCornerShape(DEFAULT_ROUNDED_CORNER_SIZE)
         ) {
             Box(
                 modifier = Modifier
@@ -90,8 +90,8 @@ fun HeroHomeItem(
                 .fillMaxWidth(),
             color = Color.Black.copy(alpha = .5f),
             shape = RoundedCornerShape(
-                bottomStart = ROUNDED_CORNER_SIZE,
-                bottomEnd = ROUNDED_CORNER_SIZE,
+                bottomStart = DEFAULT_ROUNDED_CORNER_SIZE,
+                bottomEnd = DEFAULT_ROUNDED_CORNER_SIZE,
             )
         ) {
 
