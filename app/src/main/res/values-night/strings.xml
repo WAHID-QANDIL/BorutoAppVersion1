@@ -14,4 +14,12 @@
     <string name="search_here">Search Here</string>
     <string name="close">Close</string>
     <string name="search">Search</string>
+    <string name="info_icon">Info Icon</string>
+    <string name="power">Power</string>
+    <string name="month">Month</string>
+    <string name="birthday">Birthday</string>
+    <string name="about">About</string>
+    <string name="family">Family</string>
+    <string name="abilities">Abilities</string>
+    <string name="naturetypes">NatureTypes</string>
 </resources>
