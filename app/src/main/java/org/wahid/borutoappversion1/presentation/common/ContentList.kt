@@ -79,7 +79,7 @@ fun handelPagingResult(
 
                 error != null -> {
                     Log.d("handelPagingResult", "handelPagingResult: $error")
-                    PlaceHolderScreen(error)
+                    PlaceHolderScreen(error, heroes = heroes)
                     false
                 }
 

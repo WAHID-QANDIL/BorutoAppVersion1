@@ -9,7 +9,7 @@ import androidx.navigation.navArgument
 import org.wahid.borutoappversion1.presentation.screens.home.HomeScreen
 import org.wahid.borutoappversion1.presentation.screens.splash.SplashScreen
 import org.wahid.borutoappversion1.presentation.screens.welcome.WelcomeScreen
-import org.wahid.borutoappversion1.presentation.search.SearchScreen
+import org.wahid.borutoappversion1.presentation.screens.search.SearchScreen
 import org.wahid.borutoappversion1.utils.Constants.HERO_ID
 
 
@@ -20,7 +20,7 @@ fun SetUpNavGraph(
 
     NavHost(
         navController = navHostController,
-        startDestination = Screen.Splash.route
+        startDestination = Screen.Splash.route,
     ) {
         composable(Screen.Splash.route) {
             SplashScreen(navHostController = navHostController)

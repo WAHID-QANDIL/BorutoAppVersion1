@@ -112,6 +112,7 @@ dependencies {
 
 //    // Swipe to Refresh - Accompanist
     implementation(libs.androidx.swiperefreshlayout)
+    implementation ("com.google.accompanist:accompanist-swiperefresh:0.24.13-rc")
 
     implementation(libs.androidx.viewpager2)
 //    implementation(libs.androidx.swiperefreshlayout)

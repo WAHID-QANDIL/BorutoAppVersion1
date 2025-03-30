@@ -1,4 +1,4 @@
-package org.wahid.borutoappversion1.presentation.search
+package org.wahid.borutoappversion1.presentation.screens.search
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
