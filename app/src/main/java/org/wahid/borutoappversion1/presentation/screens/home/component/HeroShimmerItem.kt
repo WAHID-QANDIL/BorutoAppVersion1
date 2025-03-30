@@ -22,7 +22,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.tooling.preview.Preview
 import org.wahid.borutoappversion1.ui.theme.HERO_HOME_ITEM_HEIGHT
 import org.wahid.borutoappversion1.ui.theme.MEDIUM_PADDING
-import org.wahid.borutoappversion1.ui.theme.ROUNDED_CORNER_SIZE
+import org.wahid.borutoappversion1.ui.theme.DEFAULT_ROUNDED_CORNER_SIZE
 import org.wahid.borutoappversion1.ui.theme.SHIMMER_ABOUT_PLACEHOLDER_ITEM
 import org.wahid.borutoappversion1.ui.theme.SHIMMER_NAME_PLACEHOLDER_ITEM
 import org.wahid.borutoappversion1.ui.theme.SHIMMER_STAR_CORNER_SIZE
@@ -40,7 +40,7 @@ fun HeroShimmerItem(alpha: Float = 1f) {
             .fillMaxWidth()
             .height(HERO_HOME_ITEM_HEIGHT),
 
-        shape = RoundedCornerShape(ROUNDED_CORNER_SIZE),
+        shape = RoundedCornerShape(DEFAULT_ROUNDED_CORNER_SIZE),
         color = MaterialTheme.colorScheme.shimmerBackgroundColor
     ) {
         Column(
