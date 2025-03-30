@@ -6,6 +6,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import org.wahid.borutoappversion1.presentation.screens.details.DetailsScreen
 import org.wahid.borutoappversion1.presentation.screens.home.HomeScreen
 import org.wahid.borutoappversion1.presentation.screens.splash.SplashScreen
 import org.wahid.borutoappversion1.presentation.screens.welcome.WelcomeScreen
@@ -31,7 +32,9 @@ fun SetUpNavGraph(
         composable(
             Screen.Details.route,
             arguments = listOf(navArgument(HERO_ID) { type = NavType.IntType })
-        ) { }
+        ) {
+            DetailsScreen(navHostController = navHostController)
+        }
         composable(Screen.Home.route) {
             HomeScreen(navHostController = navHostController)
         }

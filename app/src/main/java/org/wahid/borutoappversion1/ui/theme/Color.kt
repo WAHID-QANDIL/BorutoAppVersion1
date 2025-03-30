@@ -24,7 +24,7 @@ val ColorScheme.welcomeScreenBackgroundColor
 
 val ColorScheme.titleColor
     @Composable
-    get() = if (isSystemInDarkTheme()) Color.White else Color.Black
+    get() = if (isSystemInDarkTheme()) Color.White else Color.DarkGray
 
 
 val ColorScheme.topAppBarTitleColor
